@@ -2,6 +2,15 @@ import type { BlogPost } from '@/types';
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ai-era-reflections',
+    hasArticle: true,
+    title: 'AI 时代感悟：与不确定性构成闭环',
+    excerpt: '大模型把「会写代码」打成了地板价，而规控工程师的日常恰好站在它的对面：可验证、可兜底、可量产。一篇不谈趋势的现场笔记 —— 从控制的母语「不确定性」说起：什么在贬值，什么在升值，以及为什么手感与责任依然要自己背。',
+    date: '2026-10-28',
+    tags: ['AI 时代', '工程随想', '职业'],
+    readTime: '6 min',
+  },
+  {
     slug: 'longitudinal-control-acc-notes',
     hasArticle: true,
     title: '纵向控制笔记：从受力分析到自适应巡航',

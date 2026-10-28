@@ -20,6 +20,8 @@ npm run preview   # 本地预览构建产物（http://localhost:4173）
 > Vercel / Netlify 默认支持；Nginx 用 `try_files $uri $uri/ /index.html;`。
 > 分享卡片在 `public/og-card.jpg`（1200×630，由首页 Hero 截图而来，`index.html` 的 og:image 为站内绝对路径）—— 绑定正式域名后建议把 og:image / og:url 换成绝对 URL，并补一份带域名的 `sitemap.xml`。
 
+**线上部署**：阿里云轻量服务器（47.93.199.134，SSH 别名 `hermes-agent`，nginx 已配好 SPA 回退与 gzip，站点配置在服务器 `/etc/nginx/default.d/majitong-site.conf`）。更新流程：`npm run build && bash scripts/deploy.sh`。
+
 ## 架构
 
 ```
