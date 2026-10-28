@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Global Typography & Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border: 3px solid var(--color-background);
+    border-radius: 8px;
+  }
+
+  /* KaTeX 微调：融入版面而非突兀 */
+  .katex {
+    font-size: 1.05em;
+  }
+  .katex-display {
+    margin: 0;
+  }
+}
+
+/* ============================================================
+   Component-level utilities
+   ============================================================ */
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-10;
+  }
+
+  .card {
+    @apply rounded-card border border-line bg-surface-raised shadow-card;
+  }
+
+  /* 小型等宽 Label，工程图纸语言 */
+  .kicker {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.18em];
+  }
+
+  /* 章节编号 01 / 02 … */
+  .section-index {
+    @apply font-mono text-xs tracking-[0.22em] text-accent;
+  }
+
+  /* 图形外框角标（工程图坐标角） */
+  .plot-ticks::before,
+  .plot-ticks::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-color: var(--color-border-strong);
+    border-style: solid;
+  }
+  .plot-ticks::before {
+    top: -1px;
+    left: -1px;
+    border-width: 1px 0 0 1px;
+  }
+  .plot-ticks::after {
+    right: -1px;
+    bottom: -1px;
+    border-width: 0 1px 1px 0;
+  }
+
+  /* 导航滚动后的毛玻璃 */
+  .nav-scrolled {
+    background: color-mix(in srgb, var(--color-hero-background) 78%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--color-hero-line);
+  }
+
+  .hairline-t {
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+/* ============================================================
+   SVG 动画工具
+   ============================================================ */
+@layer utilities {
+  .svg-spin-slow {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin-rotate 16s linear infinite;
+  }
+
+  /* 环境层：LiDAR 点云漂移 */
+  .ambient-drift {
+    animation: drift-x 30s ease-in-out infinite alternate;
+  }
+  .ambient-drift-2 {
+    animation: drift-x2 38s ease-in-out infinite alternate;
+  }
+
+  /* 轨迹流动（虚线偏移） */
+  .flow-dash {
+    animation: flow-dash 7s linear infinite;
+  }
+  .flow-dash-slow {
+    animation: flow-dash 16s linear infinite;
+  }
+
+  /* 旅行地图：悬停剪影预告 —— 照片压成近黑的纸雕预告，点击后灯箱揭晓彩色原片 */
+  .travel-silhouette {
+    filter: grayscale(1) brightness(0.16) contrast(1.15);
+  }
+
+  /* 公式呼吸：极缓亮度变化 */
+  .eq-breathe {
+    animation: eq-breathe 9s ease-in-out infinite;
+  }
+
+  /* 科研图形 hover 动画：默认暂停，hover 运行 */
+  .rv-anim {
+    animation-play-state: paused !important;
+  }
+  .group\/card:hover .rv-anim,
+  .group\/card:focus-within .rv-anim {
+    animation-play-state: running !important;
+  }
+
+  /* 车辆状态变量：hover 显形的工程彩蛋 */
+  .egg-label {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .group\/car:hover .egg-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drift-x {
+  from {
+    transform: translateX(-7px);
+  }
+  to {
+    transform: translateX(7px);
+  }
+}
+
+@keyframes drift-x2 {
+  from {
+    transform: translate(5px, 3px);
+  }
+  to {
+    transform: translate(-6px, -3px);
+  }
+}
+
+@keyframes flow-dash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+
+@keyframes eq-breathe {
+  0%,
+  100% {
+    opacity: 0.34;
+  }
+  50% {
+    opacity: 0.62;
+  }
+}
+
+/* ============================================================
+   科研图形 hover 动画（配合 .rv-anim 的暂停/运行机制）
+   ============================================================ */
+@keyframes rv-flow {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+@keyframes rv-draw {
+  0% {
+    stroke-dashoffset: var(--rv-len, 300);
+  }
+  55% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes rv-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+@keyframes rv-breathe-scale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@layer utilities {
+  .rv-flow {
+    stroke-dasharray: 6 6;
+    animation: rv-flow 3s linear infinite;
+  }
+  .rv-draw {
+    stroke-dasharray: var(--rv-len, 300);
+    animation: rv-draw 4.2s ease-in-out infinite;
+  }
+  .rv-pulse {
+    animation: rv-pulse 3s ease-in-out infinite;
+  }
+  .rv-breathe-s {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: rv-breathe-scale 3.4s ease-in-out infinite;
+  }
+}
+
+/* ============================================================
+   Reduced Motion —— 全局降级
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .rv-anim,
+  .ambient-drift,
+  .ambient-drift-2,
+  .flow-dash,
+  .flow-dash-slow,
+  .eq-breathe,
+  .svg-spin-slow {
+    animation: none !important;
+  }
+  .egg-label {
+    opacity: 1;
+    transform: none;
+  }
+}

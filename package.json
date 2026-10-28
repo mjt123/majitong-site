@@ -1,0 +1,34 @@
+{
+  "name": "zhangmingyuan-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/spa-fallback.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.1.0",
+    "@fontsource-variable/noto-sans-sc": "^5.1.0",
+    "@fontsource-variable/source-serif-4": "^5.1.0",
+    "framer-motion": "^11.11.9",
+    "katex": "^0.16.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.7",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "localtunnel": "^2.0.2",
+    "playwright-core": "^1.62.1",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  }
+}

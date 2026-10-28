@@ -1,0 +1,9 @@
+node_modules
+dist
+shots
+*.local
+.DS_Store
+.tmp-tools
+.zcode
+.bak
+.travel-*.png

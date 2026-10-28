@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /travel-edit
+Disallow: /blog-import
